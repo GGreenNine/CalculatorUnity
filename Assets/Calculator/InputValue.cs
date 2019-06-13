@@ -24,7 +24,7 @@ public class InputValue : MonoBehaviour
         {
             case "=":
                 ResultInput = string.Join("", ResList);
-                CalcEngine.CEngine.ResultText.text = CalcEngine.CEngine.GeneralCalcMethod(ResultInput + "=").ToString();
+                CalcEngine.Instance.ResultText.text = CalcEngine.Instance.GeneralCalcMethod(ResultInput + "=").ToString();
                 break;
             case "←":
                 if (ResList.Any() && !CalcEngine.IsCalculated)
@@ -55,8 +55,7 @@ public class InputValue : MonoBehaviour
             case "c":
                 UIResultInput.Add("cos");
                 break;
-            case
-                "t":
+            case"t":
                 UIResultInput.Add("tan");
                 break;
             case "f":
@@ -86,23 +85,17 @@ public class InputValue : MonoBehaviour
 
         }
     }
-
-    private void Start()
-    {
-        Debug.Log(Mathf.Acos(0) * Mathf.Rad2Deg);
-    }
-
     public void RadDegSwitch()
     {
         if (CalcEngine.IsRad)
         {
             CalcEngine.IsRad = false;
-            CalcEngine.CEngine.RadDeg.text = "Deg";
+            CalcEngine.Instance.RadDeg.text = "Deg";
         }
         else
         {
             CalcEngine.IsRad = true;
-            CalcEngine.CEngine.RadDeg.text = "Rad";
+            CalcEngine.Instance.RadDeg.text = "Rad";
         }
             
     }

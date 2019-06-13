@@ -8,10 +8,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-class CalcEngine : MonoBehaviour
+class CalcEngine : Singleton<CalcEngine>
 {
-    public static CalcEngine CEngine;
-
     public Text ResultText;
     public Text InputText;
 
@@ -21,11 +19,6 @@ class CalcEngine : MonoBehaviour
     public static bool IsInversed = false;
 
     private bool isReversed;
-
-    private void Awake()
-    {
-        CEngine = this;
-    }
 
     private void Update()
     {
@@ -91,10 +84,7 @@ class CalcEngine : MonoBehaviour
                             firstPart += "$";
                             var secondPart = input.Substring(i + 1);
                             var newInput = firstPart + secondPart;
-                            Debug.Log(newInput + "newInput");
                             var outputnew = MakeRPN(newInput);
-                            Debug.Log(outputnew + " outputnew");
-                            Debug.Log(Calculate(outputnew) + "CalcNew");
                             return outputnew;
                         }
                         break;
@@ -215,16 +205,13 @@ class CalcEngine : MonoBehaviour
                         result = Mathf.Sqrt(a);
                         break;
                     case 'c':
-                        if (IsRad) result = Mathf.Cos((float)a);
-                        else result = Mathf.Cos((float)a * Mathf.Deg2Rad);
+                        result = IsRad ? Mathf.Cos((float)a) : Mathf.Cos((float)a * Mathf.Deg2Rad);
                         break;
                     case 's':
-                        if (IsRad) result = Mathf.Sin((float)a);
-                        else result = Mathf.Sin((float)a * Mathf.Deg2Rad);
+                        result = IsRad ? Mathf.Sin((float)a) : Mathf.Sin((float)a * Mathf.Deg2Rad);
                         break;
                     case 't':
-                        if (IsRad) result = Mathf.Tan((float)a);
-                        else result = Mathf.Tan((float)a * Mathf.Deg2Rad);
+                        result = IsRad ? Mathf.Tan((float)a) : Mathf.Tan((float)a * Mathf.Deg2Rad);
                         break;
                     case 'x':
                         result = b * Mathf.Pow(10, a);
@@ -262,14 +249,14 @@ class CalcEngine : MonoBehaviour
         return calculateStack.Peek(); //Return the Result
     }
 
-    static private bool IsSpaceOrEqually(char symbol)
+    private static bool IsSpaceOrEqually(char symbol)
     {
         if ((" =".IndexOf(symbol) != -1))
             return true;
         return false;
     }
     // if operator
-    static private bool IsOperator(char c)
+    private static bool IsOperator(char c)
     {
         if (("+-/*^√cstxflnqwy$()".IndexOf(c) != -1))
             return true;
@@ -277,7 +264,7 @@ class CalcEngine : MonoBehaviour
         return false;
     }
     //operators priority
-    static private int SetPriority(char symbol)
+    private static int SetPriority(char symbol)
     {
         switch (symbol)
         {
