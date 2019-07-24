@@ -10,20 +10,13 @@ using UnityEngine.Events;
 
 class CalcEngine : Singleton<CalcEngine>
 {
-    public Text ResultText;
-    public Text InputText;
-
-    public Text RadDeg;
     public static bool IsCalculated;
     public static bool IsRad;
     public static bool IsInversed = false;
 
     private bool isReversed;
 
-    private void Update()
-    {
-        InputText.text = string.Join("", InputValue.UIResultInput);
-    }
+
     /// <summary>
     /// Основной метод
     /// </summary>
@@ -31,109 +24,103 @@ class CalcEngine : Singleton<CalcEngine>
     /// <returns></returns>
     public float GeneralCalcMethod(string input)
     {
-        string output = MakeRPN(input); //Обратная польская запись
+        var output = GetReversePolarNotationString(input); 
         Debug.Log(output + "Output");
-        float result = Calculate(output); //Находим значение выражения
-        return result; // Результат
-
+        var result = Calculate(output); 
+        return result; 
     }
     /// <summary>
     /// Преобразование входных данный в польскую запись
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    private string MakeRPN(string input)
+    private string GetReversePolarNotationString(string input)
     {
-        int closeBraket = 0; // кол-во закрытых скобок
-        int openBraket = 0; //кол-во открытых скобок
-        string output = null; //Строка выражения
-        Stack<char> makeRPNStack = new Stack<char>(); //Стек операторов
+        var closeBraket = 0; 
+        var openBraket = 0;
+        string output = null; 
+        var reversePolarNotataionStack = new Stack<char>(); 
 
-        for (int i = 0; i < input.Length; i++) //Цикл для всех символов строки
+        for (int i = 0; i < input.Length; i++) 
         {
-            //пропускаем = или пробел
-            if (IsSpaceOrEqually(input[i]))
-                continue; //Следующий символ
+           
+            if ((input[i]).SpaceEqual())
+                continue; 
 
-            //Если цифра
-            if (Char.IsDigit(input[i]))
+           
+            if (char.IsDigit(input[i]))
             {
                 //Пока не встетим оператор/пробел/=
-                while (!IsSpaceOrEqually(input[i]) && !IsOperator(input[i]))
+                while (!(input[i]).SpaceEqual() && !(input[i]).IsSign())
                 {
-                    output += input[i]; //Добавляем цифру к строке выражения
-                    i++; //След символ
+                    output += input[i]; 
+                    i++; 
 
-                    if (i == input.Length) break; //Если строка закончилась заканчиваем
+                    if (i == input.Length) break; 
                 }
 
                 output += " "; //Дописываем после числа пробел в строку с выражением
                 i--; //Возвращаемся на один символ назад, к символу перед разделителем
             }
-
-            //Если символ - оператор
-            if (IsOperator(input[i]))
+            
+            if (!(input[i]).IsSign()) continue;
+            switch (input[i])
             {
-                switch (input[i])
-                {
-                    case '-':
-                        if (makeRPNStack.Count > 0 && makeRPNStack.Peek() != ')' && IsOperator(makeRPNStack.Peek()))
-                        {
-                            input = input.Remove(i, 1);
-                            var firstPart = input.Substring(0, i + 1);
-                            firstPart += "$";
-                            var secondPart = input.Substring(i + 1);
-                            var newInput = firstPart + secondPart;
-                            var outputnew = MakeRPN(newInput);
-                            return outputnew;
-                        }
-                        break;
-                }
-
-
-                if (input[i] == '(') //Если открывающая скобка
-                {
-                    makeRPNStack.Push(input[i]);
-                    openBraket++;
-                }//Записываем в стек
-                else if (input[i] == ')') //Если закрывающая скобка
-                {
-                    //Передаем все операторы до ( в строку
-                    char s = makeRPNStack.Pop();
-                    closeBraket++;
-                    while (s != '(')
+                case '-':
+                    if (reversePolarNotataionStack.Count > 0 && reversePolarNotataionStack.Peek() != ')' && (reversePolarNotataionStack.Peek()).IsSign())
                     {
-                        output += s.ToString() + ' ';
-                        s = makeRPNStack.Pop();
+                        input = input.Remove(i, 1);
+                        var firstPart = input.Substring(0, i + 1);
+                        firstPart += "$";
+                        var secondPart = input.Substring(i + 1);
+                        var newInput = firstPart + secondPart;
+                        var outputnew = GetReversePolarNotationString(newInput);
+                        return outputnew;
                     }
-                }
-                else //Если другой оператор
-                {
-                    if (makeRPNStack.Count > 0) //Если стек не пустой
-                    {
-                        if (SetPriority(input[i]) <= SetPriority(makeRPNStack.Peek()))
-                        { //Если приоритет входящего оператора ниже или равен последнему из стека
-                            output += makeRPNStack.Pop().ToString() + " ";
-                        }//Добавляем последний оператор из стека в строку с выражением
-                    }
-                    makeRPNStack.Push(input[i]); //Если стек пустой/приоретет выше то добавляем оператор в стек
+                    break;
+            }
 
+
+            if (input[i] == '(') 
+            {
+                reversePolarNotataionStack.Push(input[i]);
+                openBraket++;
+            }//Записываем в стек
+            else if (input[i] == ')') 
+            {
+                //Передаем все операторы до ( в строку
+                char s = reversePolarNotataionStack.Pop();
+                closeBraket++;
+                while (s != '(')
+                {
+                    output += s.ToString() + ' ';
+                    s = reversePolarNotataionStack.Pop();
                 }
+            }
+            else 
+            {
+                if (reversePolarNotataionStack.Count > 0) 
+                {
+                    if (SetUpPriority(input[i]) <= SetUpPriority(reversePolarNotataionStack.Peek()))
+                    { //Если приоритет входящего оператора ниже или равен последнему из стека
+                        output += reversePolarNotataionStack.Pop().ToString() + " ";
+                    } //Добавляем последний оператор из стека в строку с выражением
+                }
+                reversePolarNotataionStack.Push(input[i]); //Если стек пустой/приоретет выше то добавляем оператор в стек
+
             }
         }
 
         //Когда прошли циклом по входящим данным, передаем из стека все операторы в строку
         if (closeBraket != openBraket)
         {
-
             throw new System.InvalidOperationException("Пропущена скобка");
-
         }
 
-        while (makeRPNStack.Count > 0)
-            output += makeRPNStack.Pop() + " ";
+        while (reversePolarNotataionStack.Count > 0)
+            output += reversePolarNotataionStack.Pop() + " ";
 
-        return output; //Возвращаем строку выражения в польской записи Returning the string in Reverse polan notation
+        return output; 
     }
     /// <summary>
     /// Factorial calculation
@@ -155,139 +142,143 @@ class CalcEngine : Singleton<CalcEngine>
     /// <returns></returns>
     private float Calculate(string input)
     {
-        float result = 0; //Результат
-        Stack<float> calculateStack = new Stack<float>(); 
+        var stack = new Stack<float>(); 
+        float calcResult = 0;
 
-        for (int i = 0; i < input.Length; i++) 
+        for (var i = 0; i < input.Length; i++) 
         {
-            //Store the digit in stack
-            if (Char.IsDigit(input[i]))
+            if (char.IsDigit(input[i]))
             {
-                string a = string.Empty;
+                var a = string.Empty;
 
-                while (!IsSpaceOrEqually(input[i]) && !IsOperator(input[i]))
+                while (!(input[i]).SpaceEqual() && !(input[i]).IsSign() )
                 {
                     a += input[i];
                     i++;
                     if (i == input.Length) break;
                 }
-                calculateStack.Push(float.Parse(a));
+                stack.Push(float.Parse(a));
                 i--;
             }
-            else if (IsOperator(input[i])) //If operator
+            else if ((input[i]).IsSign() ) 
             {
-                //2 last values from stack
-                float a = calculateStack.Pop();
-                float b = new float();
-                if (input[i] != 's' && input[i] != 'c' && input[i] != 't' && input[i] != '√' && input[i] != 'f' && input[i] != 'l' && input[i] != 'n' && input[i] != 'q' && input[i]!='w' && input[i] != 'y' && input[i] != '$')
-                    b = calculateStack.Pop();
+                var a = stack.Pop();
+                var b = new float();
+                if (input[i] != 's' && input[i] != 'c' && input[i] != 't' && input[i] != '√' && 
+                    input[i] != 'f' && input[i] != 'l' && input[i] != 'n' && input[i] != 'q' && 
+                    input[i]!='w' && input[i] != 'y' && input[i] != '$')
+                    b = stack.Pop();
 
 
 
-                switch (input[i]) //
+                switch (input[i]) 
                 {
-                    case '+':
-                        result = b + a;
-                        break;
                     case '-':
-                        result = b - a;
+                        calcResult = b - a;
                         break;
-                    case '*':
-                        result = b * a;
-                        break;
-                    case '/':
-                        result = b / a;
+                    case '+':
+                        calcResult = b + a;
                         break;
                     case '^':
-                        result = Mathf.Pow(b, a);
+                        calcResult = Mathf.Pow(b, a);
+                        break;
+                    case '*':
+                        calcResult = b * a;
                         break;
                     case '√':
-                        result = Mathf.Sqrt(a);
+                        calcResult = Mathf.Sqrt(a);
+                        break;
+                    case '/':
+                        calcResult = b / a;
                         break;
                     case 'c':
-                        result = IsRad ? Mathf.Cos((float)a) : Mathf.Cos((float)a * Mathf.Deg2Rad);
+                        calcResult = IsRad ? Mathf.Cos((float)a) : Mathf.Cos((float)a * Mathf.Deg2Rad);
                         break;
                     case 's':
-                        result = IsRad ? Mathf.Sin((float)a) : Mathf.Sin((float)a * Mathf.Deg2Rad);
+                        calcResult = IsRad ? Mathf.Sin((float)a) : Mathf.Sin((float)a * Mathf.Deg2Rad);
                         break;
                     case 't':
-                        result = IsRad ? Mathf.Tan((float)a) : Mathf.Tan((float)a * Mathf.Deg2Rad);
+                        calcResult = IsRad ? Mathf.Tan((float)a) : Mathf.Tan((float)a * Mathf.Deg2Rad);
                         break;
                     case 'x':
-                        result = b * Mathf.Pow(10, a);
+                        calcResult = b * Mathf.Pow(10, a);
                         break;
                     case 'f':
-                        result = Factorial((int)a);
+                        calcResult = Factorial((int)a);
                         break;
                     case 'l':
-                        result = Mathf.Log10(a);
+                        calcResult = Mathf.Log10(a);
                         break;
                     case 'n':
-                        result = Mathf.Log(a);
+                        calcResult = Mathf.Log(a);
                         break;
                     case 'q':
-                        if (IsRad) result = Mathf.Acos((float)a);
-                        else result = Mathf.Acos((float)a) * Mathf.Rad2Deg;
+                        if (IsRad) calcResult = Mathf.Acos((float)a);
+                        else calcResult = Mathf.Acos((float)a) * Mathf.Rad2Deg;
                         break;
                     case 'w':
-                        if (IsRad) result = Mathf.Asin((float)a);
-                        else result = Mathf.Asin((float)a) * Mathf.Rad2Deg;
+                        if (IsRad) calcResult = Mathf.Asin((float)a);
+                        else calcResult = Mathf.Asin((float)a) * Mathf.Rad2Deg;
                         break;
                     case 'y':
-                        if (IsRad) result = Mathf.Atan((float)a);
-                        else result = Mathf.Atan((float)a) * Mathf.Rad2Deg;
+                        if (IsRad) calcResult = Mathf.Atan((float)a);
+                        else calcResult = Mathf.Atan((float)a) * Mathf.Rad2Deg;
                         break;
                     case '$':
-                        result = a*-1;
+                        calcResult = a*-1;
                         break;
 
                 }
-                calculateStack.Push(result); // Store the result
+                stack.Push(calcResult); 
             }
         }
         IsCalculated = true;
-        return calculateStack.Peek(); //Return the Result
+        return stack.Peek(); 
     }
 
-    private static bool IsSpaceOrEqually(char symbol)
+    private static int SetUpPriority(char c)
     {
-        if ((" =".IndexOf(symbol) != -1))
-            return true;
-        return false;
-    }
-    // if operator
-    private static bool IsOperator(char c)
-    {
-        if (("+-/*^√cstxflnqwy$()".IndexOf(c) != -1))
-            return true;
-
-        return false;
-    }
-    //operators priority
-    private static int SetPriority(char symbol)
-    {
-        switch (symbol)
+        switch (c)
         {
             case '(': return 0;
             case ')': return 1;
-            case '+': return 2;
             case '-': return 3;
             case '*': return 4;
+            case '+': return 2;
             case '/': return 4;
-            case '^': return 5;
             case '√': return 5;
-            case 's': return 5;
+            case '^': return 5;
             case 'c': return 5;
+            case 's': return 5;
+            case 'f': return 4;
             case 't': return 5;
             case 'x': return 4;
-            case 'f': return 4;
             case 'l': return 5;
+            case 'w': return 5;
             case 'n': return 5;
             case 'q': return 5;
-            case 'w': return 5;
             case 'y': return 5;
             case '$': return 4;
             default: return 5;
         }
+    }
+}
+
+public static class StringExtensions
+{
+    private static bool Contains(this String str, char substring)
+    {                            
+        if (substring == null)
+            throw new ArgumentNullException("substring", 
+                "substring cannot be null.");
+        return str.IndexOf(substring) >= 0;                      
+    }
+    public static bool SpaceEqual(this char c)
+    {
+        return " =".Contains(c);
+    }
+    public static bool IsSign(this char c)
+    {
+        return "+-/*^√cstxflnqwy$()".Contains(c);
     }
 }

@@ -187,7 +187,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 4361825}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -273,7 +273,6 @@ RectTransform:
   m_Children:
   - {fileID: 1595538953}
   - {fileID: 665991393}
-  - {fileID: 389401525}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -417,7 +416,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 17719217}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -546,7 +545,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 104691928}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -790,7 +789,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 144372134}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1465,85 +1464,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354191328}
   m_CullTransparentMesh: 0
---- !u!1 &389401524
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 389401525}
-  - component: {fileID: 389401527}
-  - component: {fileID: 389401526}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &389401525
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389401524}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7278983}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -42.05}
-  m_SizeDelta: {x: 448.6, y: 84.1}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &389401526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389401524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 85
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Engeneer Calculator
---- !u!222 &389401527
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389401524}
-  m_CullTransparentMesh: 0
 --- !u!1 &411914482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,7 +1668,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 485528130}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2803,7 +2723,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 682219116}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3111,9 +3031,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6e2cfb73f8a2c41bb3aeb99425f616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResultText: {fileID: 1537080123}
-  InputText: {fileID: 348988215}
-  RadDeg: {fileID: 2004076407}
 --- !u!4 &809014552
 Transform:
   m_ObjectHideFlags: 0
@@ -3140,11 +3057,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6eead096b3e62468851a1782090620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InverseButtons:
+  ResultText: {fileID: 1537080123}
+  InputText: {fileID: 348988215}
+  RadDeg: {fileID: 2004076407}
+  inverseButtons:
   - {fileID: 679746939}
   - {fileID: 1509129371}
   - {fileID: 165401272}
-  ReverseButtons:
+  reverseButtons:
   - {fileID: 411914482}
   - {fileID: 1657106764}
   - {fileID: 1004434882}
@@ -3223,7 +3143,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 835707557}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3589,7 +3509,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 945525215}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4163,7 +4083,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1055760552}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4292,7 +4212,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1058052832}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4500,7 +4420,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1081537191}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4708,7 +4628,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1200164250}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4916,7 +4836,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1203190159}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5648,7 +5568,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1380401422}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5777,7 +5697,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1386271940}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5985,7 +5905,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1467091485}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6628,7 +6548,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1623340683}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6965,7 +6885,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1708270518}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7252,7 +7172,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1812050076}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7381,7 +7301,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1823804005}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7589,7 +7509,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1844052128}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7718,7 +7638,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1846973095}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -7847,7 +7767,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1848773872}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -8055,7 +7975,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 1917132737}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -8758,7 +8678,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 2115112285}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -8887,7 +8807,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 2118880922}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -9016,7 +8936,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2008489488}
+  m_TargetGraphic: {fileID: 2120323487}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:

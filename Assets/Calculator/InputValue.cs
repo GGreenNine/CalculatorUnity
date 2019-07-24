@@ -5,17 +5,31 @@ using UnityEngine;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class InputValue : MonoBehaviour
 {
-    public static string ResultInput;
-    public static List<string> UIResultInput = new List<string>();
-    public static List<string> ResList = new List<string>();
-    public GameObject[] InverseButtons, ReverseButtons;
+    private static string _resultInput;
+    private static readonly List<string> UiResultInput = new List<string>();
+    private static readonly List<string> ResList = new List<string>();
+    
+    public Text ResultText;
+    public Text InputText;
+    public Text RadDeg;
+    
+    [FormerlySerializedAs("InverseButtons")] public GameObject[] inverseButtons;
+    [FormerlySerializedAs("ReverseButtons")] public GameObject[] reverseButtons;
 
+    
+    private void UpdateText()
+    {
+        InputText.text = string.Join("", InputValue.UiResultInput);
+    }
+    
     public void Input(string value)
     {
-        if (value != "" && value != "=" && value != "←" && value != "p" && value != "e")
+        if (!"=←pe".Contains(value))
         {
             ResList.Add(value);
         }
@@ -23,14 +37,14 @@ public class InputValue : MonoBehaviour
         switch (value)
         {
             case "=":
-                ResultInput = string.Join("", ResList);
-                CalcEngine.Instance.ResultText.text = CalcEngine.Instance.GeneralCalcMethod(ResultInput + "=").ToString();
+                _resultInput = string.Join("", ResList);
+                ResultText.text = CalcEngine.Instance.GeneralCalcMethod(_resultInput + "=").ToString();
                 break;
             case "←":
                 if (ResList.Any() && !CalcEngine.IsCalculated)
                 {
                     ResList.RemoveAt(ResList.Count - 1);
-                    UIResultInput.RemoveAt(UIResultInput.Count -1);
+                    UiResultInput.RemoveAt(UiResultInput.Count -1);
                 }
                 break;
             case "i":
@@ -38,64 +52,66 @@ public class InputValue : MonoBehaviour
                 break;
             case "CE":
                 ResList.Clear();
-                UIResultInput.Clear();
+                UiResultInput.Clear();
                 CalcEngine.IsCalculated = false;
                 break;
             case "p":
                 ResList.Add("3,141");
-                UIResultInput.Add("3,141"); ;
+                UiResultInput.Add("3,141"); ;
                 break;
             case "e":
                 ResList.Add("2.718");
-                UIResultInput.Add("2,718");
+                UiResultInput.Add("2,718");
                 break;
             case "s":
-                UIResultInput.Add("sin");
+                UiResultInput.Add("sin");
                 break;
             case "c":
-                UIResultInput.Add("cos");
+                UiResultInput.Add("cos");
                 break;
             case"t":
-                UIResultInput.Add("tan");
+                UiResultInput.Add("tan");
                 break;
             case "f":
-                UIResultInput.Add("n!");
+                UiResultInput.Add("n!");
                 break;
             case "l":
-                UIResultInput.Add("Log10");
+                UiResultInput.Add("Log10");
                 break;
             case "n":
-                UIResultInput.Add("Log");
+                UiResultInput.Add("Log");
                 break;
             case "q":
-                UIResultInput.Add("Acos");
+                UiResultInput.Add("Acos");
                 break;
             case "w":
-                UIResultInput.Add("Asin");
+                UiResultInput.Add("Asin");
                 break;
             case "y":
-                UIResultInput.Add("Atan");
+                UiResultInput.Add("Atan");
                 break;
             case "$":
-                UIResultInput.Add("*-1");
+                UiResultInput.Add("*-1");
                 break;
             default:
-                UIResultInput.Add(value);
+                UiResultInput.Add(value);
                 break;
 
         }
+
+        UpdateText();
     }
     public void RadDegSwitch()
     {
         if (CalcEngine.IsRad)
         {
             CalcEngine.IsRad = false;
-            CalcEngine.Instance.RadDeg.text = "Deg";
+            RadDeg.text = "Deg";
         }
         else
         {
             CalcEngine.IsRad = true;
-            CalcEngine.Instance.RadDeg.text = "Rad";
+            RadDeg.text = "Rad";
         }
             
     }
